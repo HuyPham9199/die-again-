@@ -24,13 +24,13 @@ import {
 } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey:            "AIzaSyDobV2FUafEut4OMYC05wWSjI3Urqh8JpU",
-  authDomain:        "die-agail.firebaseapp.com",
-  projectId:         "die-agail",
-  storageBucket:     "die-agail.firebasestorage.app",
-  messagingSenderId: "806067482259",
-  appId:             "1:806067482259:web:7a7c360580fd2be43aa766",
-  measurementId:     "G-WCCNRHY6MX",
+  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId:     import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app  = initializeApp(firebaseConfig);
