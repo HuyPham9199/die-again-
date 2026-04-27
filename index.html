@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Die Again</title>
+  <link rel="stylesheet" href="/src/ui/styles.css" />
+</head>
+<body>
+  <!-- Lobby overlay (hidden during gameplay) -->
+  <div id="lobby" class="overlay active">
+    <div class="lobby-content">
+      <div class="logo">
+        <h1>DIE AGAIN</h1>
+        <p class="subtitle">Bạn nghĩ bạn giỏi hả? 😈</p>
+      </div>
+      <div id="auth-section">
+        <button id="btn-google-login" class="btn btn-primary">
+          <img src="/icons/google.svg" alt="" width="20" /> Đăng nhập Google
+        </button>
+      </div>
+      <div id="user-info" class="hidden">
+        <img id="user-avatar" src="" alt="" />
+        <span id="user-name"></span>
+        <span id="user-level">Level: 0</span>
+      </div>
+      <div class="lobby-buttons">
+        <button id="btn-play" class="btn btn-big">▶ BẮT ĐẦU</button>
+        <button id="btn-leaderboard" class="btn btn-secondary">🏆 XẾP HẠNG</button>
+        <button id="btn-logout" class="btn btn-ghost hidden">Đăng xuất</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Level select overlay -->
+  <div id="level-select" class="overlay hidden">
+    <div class="level-select-content">
+      <div class="level-select-header">
+        <button id="btn-back-lobby" class="btn btn-ghost">← Quay lại</button>
+        <h2>Chọn Level</h2>
+      </div>
+      <div id="level-grid" class="level-grid"></div>
+    </div>
+  </div>
+
+  <!-- Leaderboard modal -->
+  <div id="leaderboard-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🏆 Xếp hạng toàn cầu</h2>
+        <button id="btn-close-lb" class="btn btn-ghost">✕</button>
+      </div>
+      <div id="leaderboard-list" class="leaderboard-list">
+        <p>Đang tải...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game canvas container -->
+  <div id="game-container"></div>
+
+  <!-- Mobile virtual controls -->
+  <div id="mobile-controls" class="hidden">
+    <div class="ctrl-left">
+      <button class="ctrl-btn" id="ctrl-left" data-action="left">◀</button>
+      <button class="ctrl-btn" id="ctrl-right" data-action="right">▶</button>
+    </div>
+    <div class="ctrl-right">
+      <button class="ctrl-btn ctrl-jump" id="ctrl-jump" data-action="jump">▲</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
