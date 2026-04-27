@@ -39,9 +39,12 @@ export class GameScene extends Phaser.Scene {
 
   create() {
     if (!this.currentLevel) {
-      // No level loaded yet — stay dormant, lobby handles navigation
       return;
     }
+    // Force keyboard focus back to Phaser canvas (lost when HTML buttons were clicked)
+    this.input.keyboard.enableGlobalCapture();
+    this.game.canvas.focus();
+
     this._buildLevel(this.currentLevel);
     showMobileControls(true);
   }

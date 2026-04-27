@@ -12,11 +12,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.body.setOffset(2, 2);
 
     this.cursors = scene.input.keyboard.addKeys({
-      left:  Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      jump:  Phaser.Input.Keyboard.KeyCodes.W,
-      jump2: Phaser.Input.Keyboard.KeyCodes.SPACE,
+      left:   Phaser.Input.Keyboard.KeyCodes.A,
+      right:  Phaser.Input.Keyboard.KeyCodes.D,
+      jump:   Phaser.Input.Keyboard.KeyCodes.W,
+      jump2:  Phaser.Input.Keyboard.KeyCodes.SPACE,
+      left2:  Phaser.Input.Keyboard.KeyCodes.LEFT,
+      right2: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+      up:     Phaser.Input.Keyboard.KeyCodes.UP,
+      down:   Phaser.Input.Keyboard.KeyCodes.DOWN,
     });
+
+    // Prevent arrow keys from scrolling the page
+    scene.input.keyboard.addCapture([
+      Phaser.Input.Keyboard.KeyCodes.LEFT,
+      Phaser.Input.Keyboard.KeyCodes.RIGHT,
+      Phaser.Input.Keyboard.KeyCodes.UP,
+      Phaser.Input.Keyboard.KeyCodes.DOWN,
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
+    ]);
 
     this.isAlive     = true;
     this.jumpPressed = false;
@@ -42,10 +55,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   update() {
     if (!this.isAlive) return;
 
-    const kb    = this.cursors;
-    const goLeft  = (isMobile ? virtualKeys.left  : kb.left.isDown)  ^ this.controlsReversed;
-    const goRight = (isMobile ? virtualKeys.right : kb.right.isDown) ^ this.controlsReversed;
-    const wantJump = isMobile ? virtualKeys.jump : (kb.jump.isDown || kb.jump2.isDown);
+    const kb = this.cursors;
+    const kbLeft  = kb.left.isDown  || kb.left2.isDown;
+    const kbRight = kb.right.isDown || kb.right2.isDown;
+    const kbJump  = kb.jump.isDown  || kb.jump2.isDown || kb.up.isDown;
+
+    const goLeft   = (isMobile ? virtualKeys.left  : kbLeft)  ^ this.controlsReversed;
+    const goRight  = (isMobile ? virtualKeys.right : kbRight) ^ this.controlsReversed;
+    const wantJump = isMobile ? virtualKeys.jump : kbJump;
 
     if (goLeft)       this.setVelocityX(-PLAYER_SPEED);
     else if (goRight) this.setVelocityX(PLAYER_SPEED);

@@ -18,6 +18,7 @@ const config = {
   height: GAME_HEIGHT,
   parent: 'game-container',
   backgroundColor: '#0d0d1a',
+  canvasFocus: true,
   physics: {
     default: 'arcade',
     arcade:  { debug: false },
@@ -121,8 +122,10 @@ function launchLevel(num) {
   initMobileControls();
   showMobileControls(true);
 
-  // Small delay to ensure scene is ready
+  // Small delay to ensure scene is ready, then focus canvas for keyboard input
   setTimeout(() => {
+    game.canvas.setAttribute('tabindex', '0');
+    game.canvas.focus();
     const gs = game.scene.getScene('GameScene');
     if (gs) {
       gs.startLevel(num);
